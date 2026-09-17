@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Variedades de Cannabis</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #174d2d,
+                    #071b11 45%,
+                    #020806 100%
+                );
+
+            color: white;
+
+            padding: 50px 20px;
+
+        }
+
+
+        /* =========================
+           ENCABEZADO
+        ========================= */
+
+        .titulo {
+
+            text-align: center;
+
+            margin-bottom: 50px;
+
+        }
+
+        .titulo h1 {
+
+            font-size: 48px;
+
+            color: #68ff91;
+
+            text-shadow:
+                0 0 10px #29c957,
+                0 0 25px rgba(41,201,87,.5);
+
+            margin-bottom: 12px;
+
+        }
+
+        .titulo h2 {
+
+            font-size: 20px;
+
+            color: #d5e9dc;
+
+            font-weight: normal;
+
+            margin-bottom: 12px;
+
+        }
+
+        .titulo p {
+
+            max-width: 700px;
+
+            margin: auto;
+
+            color: #91ad9c;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =========================
+           TARJETAS
+        ========================= */
+
+        .contenedor-tarjetas {
+
+            width: 100%;
+
+            max-width: 1050px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 300px);
+
+            justify-content: center;
+
+            gap: 35px;
+
+        }
+
+
+        .tarjeta {
+
+            width: 300px;
+
+            height: 350px;
+
+            perspective: 1000px;
+
+        }
+
+
+        .cara {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100%;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            backface-visibility: hidden;
+
+            transition: transform .7s ease;
+
+        }
+
+
+        /* =========================
+           FRENTE
+        ========================= */
+
+        .frontal {
+
+            position: absolute;
+
+            transform: rotateY(0deg);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #123d25,
+                    #020b06
+                );
+
+            border:
+                1px solid #2b7546;
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,.7);
+
+        }
+
+
+        .frontal img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        /* Oscurecer parte inferior */
+
+        .frontal::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 45%,
+                    rgba(0,0,0,.95)
+                );
+
+        }
+
+
+        .frontal h3 {
+
+            position: absolute;
+
+            bottom: 20px;
+
+            left: 0;
+
+            width: 100%;
+
+            text-align: center;
+
+            z-index: 2;
+
+            font-size: 25px;
+
+            text-shadow:
+                2px 2px 6px black;
+
+        }
+
+
+        /* =========================
+           PARTE TRASERA
+        ========================= */
+
+        .posterior {
+
+            position: absolute;
+
+            transform: rotateY(180deg);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #123d25,
+                    #041009
+                );
+
+            border:
+                1px solid #347d4e;
+
+            padding: 25px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            text-align: center;
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,.7);
+
+        }
+
+
+        .posterior h3 {
+
+            color: #68ff91;
+
+            font-size: 26px;
+
+        }
+
+
+        .posterior p {
+
+            color: #d2dfd6;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .info {
+
+            background:
+                rgba(0,0,0,.35);
+
+            border:
+                1px solid #28653c;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            color: #8affaa;
+
+        }
+
+
+        .info span {
+
+            color: white;
+
+            font-weight: bold;
+
+        }
+
+
+        .link {
+
+            border-top:
+                1px solid #347d4e;
+
+            padding-top: 15px;
+
+        }
+
+
+        .link a {
+
+            color: #68ff91;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+        }
+
+
+        .link a:hover {
+
+            color: white;
+
+        }
+
+
+        /* =========================
+           ANIMACIÓN
+        ========================= */
+
+        .tarjeta:hover .frontal {
+
+            transform:
+                rotateY(-180deg);
+
+        }
+
+
+        .tarjeta:hover .posterior {
+
+            transform:
+                rotateY(0deg);
+
+        }
+
+
+        /* =========================
+           PIE
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            margin-top: 60px;
+
+            color: #668573;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .contenedor-tarjetas {
+
+                grid-template-columns:
+                    repeat(2, 300px);
+
+            }
+
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 680px) {
+
+            .titulo h1 {
+
+                font-size: 34px;
+
+            }
+
+            .titulo h2 {
+
+                font-size: 17px;
+
+            }
+
+            .contenedor-tarjetas {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .tarjeta {
+
+                margin: auto;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         TÍTULO
+    ========================= -->
+
+    <div class="titulo">
+
+        <h1>🌿 Variedades de Cannabis</h1>
+
+        <h2>
+            Conoce algunas de las variedades más conocidas
+        </h2>
+
+        <p>
+
+            Explora información general sobre diferentes
+            variedades de cannabis, sus características
+            y clasificación.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         TARJETAS
+    ========================= -->
+
+    <div class="contenedor-tarjetas">
+
+
+        <!-- OG KUSH -->
+
+        <div class="tarjeta">
+
+            <div class="cara frontal">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjPwIGZwRcP6SRIlM7U4_5s_xCZlsYrNcpoRvoN2igLQ&s=10"
+                    alt="OG Kush">
+
+                <h3>OG Kush</h3>
+
+            </div>
+
+
+            <div class="cara posterior">
+
+                <h3>OG Kush</h3>
+
+                <p>
+
+                    Variedad híbrida muy conocida dentro de
+                    la cultura del cannabis. Es reconocida
+                    por su perfil aromático terroso,
+                    cítrico y con notas de pino.
+
+                </p>
+
+                <div class="info">
+
+                    Tipo:
+                    <span>Híbrida</span>
+
+                </div>
+
+                <div class="link">
+
+                    <a
+                        href="https://es.wikipedia.org/wiki/Cannabis"
+                        target="_blank">
+
+                        Más información →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- LEMON HAZE -->
+
+        <div class="tarjeta">
+
+            <div class="cara frontal">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaAXDzYDjlATTqL8hQoja6Do_Acp2RXVfSXYBxQanSZA&s=10"
+                    alt="Lemon Haze">
+
+                <h3>Lemon Haze</h3>
+
+            </div>
+
+
+            <div class="cara posterior">
+
+                <h3>Lemon Haze</h3>
+
+                <p>
+
+                    Variedad conocida por su característico
+                    perfil cítrico y su aroma asociado
+                    con limón.
+
+                </p>
+
+                <div class="info">
+
+                    Tipo:
+                    <span>Sativa</span>
+
+                </div>
+
+                <div class="link">
+
+                    <a
+                        href="https://www.leafly.com/strains/lemon-haze"
+                        target="_blank">
+
+                        Más información →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GRAPE APE -->
+
+        <div class="tarjeta">
+
+            <div class="cara frontal">
+
+                <img
+                    src="https://cdn.shopify.com/s/files/1/0829/7427/7978/files/grape-ape-auto-violett-gelbe-buds.webp?v=1765217577"
+                    alt="Grape Ape">
+
+                <h3>Grape Ape</h3>
+
+            </div>
+
+
+            <div class="cara posterior">
+
+                <h3>Grape Ape</h3>
+
+                <p>
+
+                    Variedad conocida por sus tonos púrpuras
+                    y por un perfil aromático asociado
+                    con uva y frutos dulces.
+
+                </p>
+
+                <div class="info">
+
+                    Tipo:
+                    <span>Índica dominante</span>
+
+                </div>
+
+                <div class="link">
+
+                    <a
+                        href="https://www.leafly.com/strains/grape-ape"
+                        target="_blank">
+
+                        Más información →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GIRL SCOUT COOKIES -->
+
+        <div class="tarjeta">
+
+            <div class="cara frontal">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-L9B72bKurIqC1419llDugVnghDc-QsftzUCynd85A&s=10"
+                    alt="Girl Scout Cookies">
+
+                <h3>Girl Scout Cookies</h3>
+
+            </div>
+
+
+            <div class="cara posterior">
+
+                <h3>Girl Scout Cookies</h3>
+
+                <p>
+
+                    Variedad híbrida ampliamente conocida.
+                    Su nombre aparece frecuentemente entre
+                    las variedades más populares de cannabis.
+
+                </p>
+
+                <div class="info">
+
+                    Tipo:
+                    <span>Híbrida</span>
+
+                </div>
+
+                <div class="link">
+
+                    <a
+                        href="https://es.wikipedia.org/wiki/Cannabis"
+                        target="_blank">
+
+                        Más información →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PURPLE HAZE -->
+
+        <div class="tarjeta">
+
+            <div class="cara frontal">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWnP-bPsQozyAHWPRmQJejW3Gv7tO4LngJDmdOrSJ9iA&s=10"
+                    alt="Purple Haze">
+
+                <h3>Purple Haze</h3>
+
+            </div>
+
+
+            <div class="cara posterior">
+
+                <h3>Purple Haze</h3>
+
+                <p>
+
+                    Una variedad conocida por su presencia
+                    en la cultura popular y por su asociación
+                    histórica con el nombre Purple Haze.
+
+                </p>
+
+                <div class="info">
+
+                    Tipo:
+                    <span>Sativa dominante</span>
+
+                </div>
+
+                <div class="link">
+
+                    <a
+                        href="https://es.wikipedia.org/wiki/Purple_Haze"
+                        target="_blank">
+
+                        Más información →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <footer>
+
+        Página educativa sobre variedades de cannabis © 2026
+
+    </footer>
+
+
+</body>
+
+</html>
